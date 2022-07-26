@@ -22,6 +22,16 @@
 
         <!-- b-html指令实现设置一个按钮 -->
         <div id="html" b-html="htmlMessage" b-on-click="reset"></div>
+        
+        <!-- 实现实时加法运算 -->
+        <div id="plus" style="display: flex;height: 30px;align-items: center;">
+            <input id="add1" type="text" b-value="add1" b-on-input="addMethod1">
+            <p>+</p>
+            <input id="add2" type="text" b-value="add2" b-on-input="addMethod2">
+            <p>=</p>
+            <p>{{result}}</p>
+            <p id="html" b-html="htmlMessage" b-on-click="resetAdd"></p>
+        </div>
     </div>
     <script src="./mixin.js"></script>
     <script src="./browser.js"></script>
@@ -35,10 +45,13 @@
             el: '#app',
             data: {
                 input: {
-                    message: 'KLEE!!!'
+                    message: 'KLEE!!!',
                 },
                 text: 'KLEE!',
-                htmlMessage: `<button>重置</button>`
+                htmlMessage: `<button>重置</button>`,
+                add1: 0,
+                add2: 0,
+                result: 0
             },
             methods: {
                 handlerInput(e) {
@@ -47,6 +60,22 @@
 
                 reset() {
                     this.text = "KLEE!"
+                },
+
+                addMethod1(e) {
+                    // this.add1 = e.target.value;
+                    this.result = parseInt(this.add1) + parseInt(this.add2)
+                },
+
+                addMethod2(e) {
+                    // this.add2 = e.target.value;
+                    this.result = parseInt(this.add1) + parseInt(this.add2)
+                },
+
+                resetAdd() {
+                    this.add1 = 0;
+                    this.add2 = 0;
+                    this.result = 0;
                 }
             }
         })
